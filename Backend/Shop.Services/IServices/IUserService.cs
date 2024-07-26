@@ -1,10 +1,11 @@
-﻿using Shop.Core.DTOs.User;
+﻿using Shop.Core.DTOs.Base;
+using Shop.Core.DTOs.User;
 
 namespace Shop.Services.IServices
 {
     public interface IUserService
     {
-        Task<SigninResponse> Signin(SignupDto dto);
-        Task<SigninResponse> Signup(SigninDto dto);
+        Task<Response<TokenDto>> Signin(SigninDto dto);
+        Task<Response<TokenDto>> Signup(SignupDto dto);
     }
 }

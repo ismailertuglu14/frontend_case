@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Core.DTOs.Base
 {
-    public class Response<T> where T : class
+    public class Response<T>
     {
         public T? Data { get; set; }
         public StatusCodes StatusCode { get; set; }
@@ -15,5 +15,6 @@ namespace Shop.Core.DTOs.Base
         public static Response<T> Success(T Data) => new() { Data = Data, StatusCode = StatusCodes.SUCCESS };
         public static Response<T> Success(T Data, StatusCodes statusCode) => new() { Data = Data, StatusCode = statusCode };
         public static Response<T> Fail(StatusCodes statusCode, string message) => new() { Data = default(T), Message = message, StatusCode = statusCode };
+        public static Response<T> Fail(StatusCodes statusCode) => new() { Data = default(T), StatusCode = statusCode };
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Shop.Core.DTOs;
+using Shop.Core.Utils;
 using Shop.Repository;
 using Shop.Repository.IRepository;
 using Shop.Repository.Repository;
@@ -16,7 +18,7 @@ namespace Shop.Core.IOC
 
             RegisterRepositories(services);
             RegisterServices(services);
-
+            RegisterConfigs(services, configuration);
         }
 
         public static void RegisterRepositories(this IServiceCollection services)
@@ -27,6 +29,11 @@ namespace Shop.Core.IOC
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<TokenService>();
+        }
+        public static void RegisterConfigs(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<JwtDto>(configuration.GetSection("JWT"));
         }
     }
 }

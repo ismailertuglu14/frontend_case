@@ -6,6 +6,7 @@ namespace Shop.Entity.Entities
     {
         [Key]
         public int Id { get; set; }
+        public bool IsDeleted { get; set; } = false;
         public DateTime CreatedAt { get; internal set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; }
     }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace Shop.Entity.Entities
 {
@@ -11,6 +7,7 @@ namespace Shop.Entity.Entities
         public int UserId { get; set; }
 
         public User User { get; set; }
+        public bool IsClosed { get; set; }
         public ICollection<CartItem> CartItems { get; set; }
     }
 }
