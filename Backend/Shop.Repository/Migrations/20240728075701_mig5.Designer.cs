@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shop.Repository;
 
@@ -11,9 +12,11 @@ using Shop.Repository;
 namespace Shop.Repository.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    partial class ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240728075701_mig5")]
+    partial class mig5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +42,7 @@ namespace Shop.Repository.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
@@ -75,7 +78,7 @@ namespace Shop.Repository.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -109,7 +112,7 @@ namespace Shop.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -120,42 +123,47 @@ namespace Shop.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3733),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5286),
                             IsDeleted = false,
                             Name = "Electronics",
-                            Path = "electronics"
+                            Path = "electronics",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3742),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5301),
                             IsDeleted = false,
                             Name = "Books",
-                            Path = "books"
+                            Path = "books",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3743),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5302),
                             IsDeleted = false,
                             Name = "Clothing",
-                            Path = "clothing"
+                            Path = "clothing",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3744),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5303),
                             IsDeleted = false,
                             Name = "Home & Kitchen",
-                            Path = "home-kitchen"
+                            Path = "home-kitchen",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3745),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5303),
                             IsDeleted = false,
                             Name = "Toys",
-                            Path = "toys"
+                            Path = "toys",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -187,7 +195,7 @@ namespace Shop.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -201,101 +209,111 @@ namespace Shop.Repository.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3878),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5450),
                             Description = "Latest smartphone",
                             IsDeleted = false,
                             Price = 699m,
-                            Title = "Smartphone"
+                            Title = "Smartphone",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3881),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5453),
                             Description = "High performance laptop",
                             IsDeleted = false,
                             Price = 999m,
-                            Title = "Laptop"
+                            Title = "Laptop",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3882),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5454),
                             Description = "Interesting fiction book",
                             IsDeleted = false,
                             Price = 19m,
-                            Title = "Fiction Book"
+                            Title = "Fiction Book",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3883),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5455),
                             Description = "Informative science book",
                             IsDeleted = false,
                             Price = 29m,
-                            Title = "Science Book"
+                            Title = "Science Book",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 5,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3884),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5457),
                             Description = "Comfortable cotton t-shirt",
                             IsDeleted = false,
                             Price = 15m,
-                            Title = "T-Shirt"
+                            Title = "T-Shirt",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 6,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3886),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5458),
                             Description = "Stylish jeans",
                             IsDeleted = false,
                             Price = 40m,
-                            Title = "Jeans"
+                            Title = "Jeans",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 7,
                             CategoryId = 4,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3887),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5459),
                             Description = "Powerful blender",
                             IsDeleted = false,
                             Price = 55m,
-                            Title = "Blender"
+                            Title = "Blender",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 8,
                             CategoryId = 4,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3888),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5460),
                             Description = "Non-stick cookware set",
                             IsDeleted = false,
                             Price = 75m,
-                            Title = "Cookware Set"
+                            Title = "Cookware Set",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 9,
                             CategoryId = 5,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3889),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5461),
                             Description = "Cool action figure",
                             IsDeleted = false,
                             Price = 25m,
-                            Title = "Action Figure"
+                            Title = "Action Figure",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
                         new
                         {
                             Id = 10,
                             CategoryId = 5,
-                            CreatedAt = new DateTime(2024, 7, 28, 12, 16, 41, 757, DateTimeKind.Local).AddTicks(3890),
+                            CreatedAt = new DateTime(2024, 7, 28, 10, 57, 1, 85, DateTimeKind.Local).AddTicks(5463),
                             Description = "Fun board game",
                             IsDeleted = false,
                             Price = 30m,
-                            Title = "Board Game"
+                            Title = "Board Game",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
 
@@ -324,7 +342,7 @@ namespace Shop.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Username")

@@ -52,9 +52,23 @@ namespace Shop.Repository.Repository
         }
 
 
-        public Task<IQueryable<T>> GetListAsync(Expression<Func<T, bool>> expression, bool tracking = true)
+        public async Task<IQueryable<T>> GetListAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IQueryable<T>> include = null, bool tracking = true)
         {
-            throw new NotImplementedException();
+            try
+            {
+                IQueryable<T> query = tracking ? Table : TableNoTracking;
+
+                if (include != null)
+                {
+                    query = include(query);
+                }
+
+                return await Task.FromResult(query.Where(expression));
+            }
+            catch
+            {
+                throw;
+            }
         }
 
         public async Task<T?> GetWhereAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IQueryable<T>> include = null, bool tracking = true)

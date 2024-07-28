@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Shop.Core.DTOs.Category;
 using Shop.Core.DTOs.User;
 using Shop.Entity.Entities;
 
@@ -9,6 +10,7 @@ namespace Shop.Core.Mapper
         public AutoMapperConfigs()
         {
             CreateMap<SignupDto, User>();
+            CreateMap<Category, GetCategoryDto>();
         }
     }
 }

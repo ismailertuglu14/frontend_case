@@ -13,7 +13,7 @@ namespace Shop.Repository.IRepository
         #region Read Operations
         Task<T?> GetByIdAsync(int id, Func<IQueryable<T>, IQueryable<T>> include = null);
         Task<T?> GetWhereAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IQueryable<T>> include = null, bool tracking = true);
-        Task<IQueryable<T>> GetListAsync(Expression<Func<T, bool>> expression, bool tracking = true);
+        Task<IQueryable<T>> GetListAsync(Expression<Func<T, bool>> expression, Func<IQueryable<T>, IQueryable<T>> include = null, bool tracking = true);
         #endregion
 
         #region Write Operations
