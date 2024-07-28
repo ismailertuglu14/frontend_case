@@ -4,7 +4,7 @@ using Shop.Core.DTOs.Cart;
 using Shop.Entity.Entities;
 using Shop.Repository.IRepository;
 using Shop.Services.IServices;
-using System.Linq;
+
 namespace Shop.Services.Services
 {
     public class CartService : ICartService
@@ -21,7 +21,7 @@ namespace Shop.Services.Services
         private int UserId = 1;
         public async Task<Response<Cart>> Get()
         {
-            Cart cart = await _cartRepository.GetWhereAsync(c => c.User.Id == UserId && !c.IsClosed);
+            Cart? cart = await _cartRepository.GetWhereAsync(c => c.User.Id == UserId && !c.IsClosed);
             return Response<Cart>.Success(cart);
         }
 
@@ -42,12 +42,11 @@ namespace Shop.Services.Services
                 }
                 Product? product = await _productRepository.GetByIdAsync(dto.ProductId);
 
-
+                CartItem? existingCartItem = cart.CartItems.Where(ci => ci.ProductId == dto.ProductId).First();
                 // If product already in cart then add quantity
-                if (cart.CartItems.Where(ci => ci.ProductId == dto.ProductId) != null)
+                if (existingCartItem != null)
                 {
-                    CartItem cartItem2 = cart.CartItems.Where(ci => ci.ProductId == dto.ProductId).First();
-                    cartItem2.Quantity += dto.Quantity;
+                    existingCartItem.Quantity += dto.Quantity;
                 }
                 else
                 {
