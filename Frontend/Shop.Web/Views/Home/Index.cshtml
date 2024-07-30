@@ -274,31 +274,12 @@
             function displayLoginOptions() {
                 var accountPopup = $('#accountPopup');
                 accountPopup.empty();
-                accountPopup.append('<a href="#" id="loginBtn">Signin</a>');
+                accountPopup.append('<a href="/auth/signin" id="loginBtn">Signin</a>');
                 accountPopup.append('<br/>');
                 accountPopup.append('<a href="/auth/signup">Signup</a>');
-                $('#loginBtn').on('click', function () {
-                    login();
-                });
+                
             }
 
-            function login() {
-                var username = prompt("Username:");
-                var password = prompt("Password:");
-                $.ajax({
-                    url: 'https://localhost:7221/api/user/signin',
-                    method: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify({ username: username, password: password }),
-                    success: function (response) {
-                        localStorage.setItem('accessToken', response.data.accessToken);
-                        checkLoginStatus();
-                    },
-                    error: function () {
-                        alert('Signin error. Try Again!');
-                    }
-                });
-            }
 
             function logout() {
                 localStorage.removeItem("accessToken");

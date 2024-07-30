@@ -25,7 +25,10 @@ app.UseEndpoints(endpoints =>
         name: "cart",
         pattern: "cart/{cartId}",
         defaults: new { controller = "Cart", action = "Index" });
-
+    endpoints.MapControllerRoute(
+     name: "signin",
+     pattern: "auth/signin",
+     defaults: new { controller = "Signin", action = "Index" });
     endpoints.MapControllerRoute(
       name: "signup",
       pattern: "auth/signup",
