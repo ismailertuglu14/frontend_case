@@ -1,0 +1,102 @@
+﻿<!-- Views/User/Index.cshtml -->
+@{
+    ViewBag.Title = "User Details";
+}
+
+<!DOCTYPE html>
+    <html>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .logo:hover {
+            color: wheat;
+        }
+
+
+
+    .actions {
+        display: flex;
+        width: 15%;
+    }
+
+
+    .header {
+        display: flex;
+        padding: 0 20px; /* Kenarlardan 20px boşluk bırakır */
+        justify-content: space-between; /* Elemanları sağa ve sola yaslar */
+        align-items: center; /* Dikey olarak ortalar */
+    }
+</style>
+    <head>
+        <title></title>
+    </head>
+    <body>
+    <header class="bg-dark text-white py-3">
+        <div class="header">
+            <a href="/" class="logo">Full Stack Case</a>
+            <div class="actions">
+                <a id="cart-button" class="text-white">Cart (<span id="cart-count">0</span>)</a>
+                <div class="dropdown">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                        Account
+                    </a>
+
+                    <ul class="dropdown-menu" id="accountPopup" />
+                </div>
+            </div>
+        </div>
+    </header>
+        <div class="container">
+            <div id="userDetails" >
+                
+                <div class="card-body">
+                    <p><strong>Username:</strong> <span id="username"></span></p>
+                    <p><strong>Password:</strong> <span id="password"></span></p>
+                    <p><strong>Full Name:</strong> <span id="fullName"></span></p>
+                    <p><strong>Email:</strong> <span id="email"></span></p>
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        getUser();
+        function getUser() {
+            var token = localStorage.getItem("accessToken")
+            $.ajax({
+                url: 'https://localhost:7221/api/user',
+                type: 'GET',
+                headers: {
+                    "Authorization": "Bearer " + token
+                },
+                    success: function (response) {
+                    if (response && response.data) {
+                        $('#username').text(response.data.username);
+                        $('#password').text(response.data.password);
+                        $('#fullName').text(response.data.fullName);
+                        $('#email').text(response.data.email || 'N/A');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('Failed to load user details: ' + xhr.responseText);
+                }
+            });
+        }
+    });
+</script>
+    </html>

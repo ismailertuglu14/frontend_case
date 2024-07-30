@@ -33,6 +33,10 @@ app.UseEndpoints(endpoints =>
       name: "signup",
       pattern: "auth/signup",
       defaults: new { controller = "Signup", action = "Index" });
+    endpoints.MapControllerRoute(
+     name: "user",
+     pattern: "user/profile",
+     defaults: new { controller = "User", action = "Index" });
 
 });
 app.MapControllerRoute(

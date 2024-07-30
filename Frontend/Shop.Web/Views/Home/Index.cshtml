@@ -248,7 +248,7 @@
                         success: function (data) {
                             var accountPopup = $('#accountPopup');
                             accountPopup.empty();
-                            accountPopup.append('<p> Username: ' + data.data.username + '</p>');
+                            accountPopup.append('<a href="/user/profile" style="cursor: pointer; text-decoration: none;"> My Account </a><br/>');
                             accountPopup.append('<a href="#" id="logoutBtn">Çıkış Yap</a>');
                             // cart item count
                             currentCartId = data.data.carts[0].id;
