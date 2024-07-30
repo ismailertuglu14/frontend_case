@@ -34,9 +34,9 @@
 
     .header {
         display: flex;
-        padding: 0 20px; /* Kenarlardan 20px boşluk bırakır */
-        justify-content: space-between; /* Elemanları sağa ve sola yaslar */
-        align-items: center; /* Dikey olarak ortalar */
+        padding: 0 20px; 
+        justify-content: space-between;
+        align-items: center;
     }
 </style>
     <head>
@@ -93,7 +93,7 @@
                     }
                 },
                 error: function (xhr, status, error) {
-                    alert('Failed to load user details: ' + xhr.responseText);
+                    alert('Error: ' + xhr.responseText);
                 }
             });
         }
