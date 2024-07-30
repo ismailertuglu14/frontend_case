@@ -37,7 +37,6 @@ namespace Shop.Core.Utils
                 claims: authClaims
             );
 
-            // Token oluşturucu sınıfından bir örnek alalım.
             JwtSecurityTokenHandler tokenHandler = new();
             token.AccessToken = tokenHandler.WriteToken(securityToken);
             return token;

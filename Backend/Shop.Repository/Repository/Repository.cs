@@ -18,26 +18,7 @@ namespace Shop.Repository.Repository
 
         public IQueryable<T> TableNoTracking => _context.Set<T>().AsNoTracking();
 
-        public Task<T> BulkInsertAsync(List<T> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> BulkUpdateAsync(List<T> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
+     
         public async Task<T?> GetByIdAsync(int id, Func<IQueryable<T>, IQueryable<T>> include = null)
         {
             IQueryable<T> query = Table;
@@ -102,9 +83,5 @@ namespace Shop.Repository.Repository
             await _context.SaveChangesAsync();
         }
 
-        public Task<T> UpdateAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

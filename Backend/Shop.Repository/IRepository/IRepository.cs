@@ -18,11 +18,7 @@ namespace Shop.Repository.IRepository
 
         #region Write Operations
         Task<T> InsertAsync(T entity);
-        Task<T> BulkInsertAsync(List<T> entities);
-        Task<T> UpdateAsync(T entity);
-        Task<T> BulkUpdateAsync(List<T> entities);
-        Task<bool> DeleteAsync(int id);
-        Task<bool> DeleteAsync(T entity);
+       
         Task SaveChangesAsync();
 
         #endregion

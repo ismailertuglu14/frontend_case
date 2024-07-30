@@ -38,8 +38,8 @@
 
     .header {
         display: flex;
-        justify-content: space-between; /* Elemanları sağa ve sola yaslar */
-        align-items: center; /* Dikey olarak ortalar */
+        justify-content: space-between;
+        align-items: center; 
     }
 </style>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
@@ -136,11 +136,13 @@
                         var listItem = `
                                 <div id="product-cart" class="col-md-12 mb-4" style="border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
                                 <div class="row">
-                                    <!-- Product Image (Solda) -->
+
+                                    <!-- Image Sectino -->
                                     <div class="col-md-4">
                                         <img src="${product.image}" class="img-fluid" style="height: 200px; width: 100%; object-fit: contain;">
                                     </div>
-                                    <!-- Product Information (Ortada) -->
+                                    <!-- Image section end -->
+
                                     <div class="col-md-6">
                                         <div class="card-body">
                                             <h5 class="card-title">${product.title}</h5>
@@ -150,7 +152,7 @@
                                             <p class="card-text font-weight-bold">Total Price: $<span id="total-${item.id}">${(item.quantity * product.price).toFixed(2)}</span></p>
                                         </div>
                                     </div>
-                                    <!-- Buttons (Sağda) -->
+                                    <!-- Buttons -->
                                      <div class="col-md-2 d-flex flex-column justify-content-center align-items-end">
                                         <button class="remove-item btn btn-danger mb-2" data-item-id="${item.id}">Remove</button>
                                     </div>
@@ -167,7 +169,7 @@
                 }
             },
             error: function (xhr, status, error) {
-                console.error('API isteği başarısız oldu: ' + error);
+                console.error('Error: ' + error);
             }
         });
 
@@ -188,10 +190,8 @@
                 quantity: 1
             }),
             success: function (response) {
-                // Başarılı bir yanıt aldığınızda
                 console.log("Item removed successfully");
 
-                // İlgili elementlerin ID'lerini belirleyin
                 var quantityElement = $('#quantity-' + itemId);
                 var totalElement = $('#total-' + itemId);
 
@@ -220,7 +220,7 @@
 
             },
             error: function (xhr, status, error) {
-                console.error("Error removing item: ", error);
+                console.error("Error: ", error);
             }
         });
     }
