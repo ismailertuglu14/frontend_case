@@ -39,6 +39,7 @@ namespace Shop.Core.IOC
         {
             services.AddDbContext<ShopDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.Configure<JwtDto>(configuration.GetSection("JWT"));
+            services.AddHttpContextAccessor();
         }
     }
 }

@@ -19,7 +19,15 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "cart",
+        pattern: "cart/{cartId}",
+        defaults: new { controller = "Cart", action = "Index" });
 
+    // Di?er route'lar
+});
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

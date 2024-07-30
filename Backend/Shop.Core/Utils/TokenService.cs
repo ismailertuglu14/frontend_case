@@ -42,18 +42,18 @@ namespace Shop.Core.Utils
             token.AccessToken = tokenHandler.WriteToken(securityToken);
             return token;
         }
-        public static string GetUserIdByToken(string token)
+        public int GetUserIdByToken(string token)
         {
             if (token == null || token == "")
             {
-                return string.Empty;
+                return 0;
             }
 
             var handler = new JwtSecurityTokenHandler();
             token = token.Split("Bearer ")[1];
             var jwtSecurityToken = handler.ReadJwtToken(token);
             var userId = jwtSecurityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            return userId ?? throw new Exception($"{typeof(TokenService).Namespace}: UserId not found in token");
+            return Convert.ToInt32(userId);
         }
 
     }

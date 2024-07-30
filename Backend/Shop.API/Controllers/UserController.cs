@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Core.DTOs.User;
 using Shop.Services.IServices;
@@ -7,6 +8,7 @@ namespace Shop.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("MyPolicy")]
     public class UserController : ControllerBase
     {
         private readonly IUserService _service;
@@ -16,6 +18,13 @@ namespace Shop.API.Controllers
             _service = service;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var result = await _service.GetUser();
+            if (result.StatusCode == Core.DTOs.Base.StatusCodes.SUCCESS) return Ok(result);
+            else return BadRequest(result);
+        }
         [HttpPost("signin")]
         public async Task<IActionResult> Signin(SigninDto dto)
         {

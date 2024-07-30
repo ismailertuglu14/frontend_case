@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shop.Core.DTOs.Cart
 {
-    public class AddToCartDto
+    public record struct AddToCartDto
     {
         public int ProductId { get; set; }
         public int Quantity { get; set; }

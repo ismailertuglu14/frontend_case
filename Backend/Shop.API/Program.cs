@@ -28,6 +28,12 @@ var mapperConfig = new MapperConfiguration(mc =>
     mc.AddProfile(new AutoMapperConfigs());
 });
 builder.Services.AddSingleton(mapperConfig.CreateMapper());
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
 
 builder.Services.AddAuthentication(options =>
 {
@@ -57,7 +63,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

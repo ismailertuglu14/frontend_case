@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shop.Repository;
 
@@ -11,9 +12,11 @@ using Shop.Repository;
 namespace Shop.Repository.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    partial class ShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240728101209_mig7")]
+    partial class mig7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,7 +123,7 @@ namespace Shop.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3819),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7842),
                             IsDeleted = false,
                             Name = "Electronics",
                             Path = "electronics"
@@ -128,7 +131,7 @@ namespace Shop.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3831),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7852),
                             IsDeleted = false,
                             Name = "Books",
                             Path = "books"
@@ -136,7 +139,7 @@ namespace Shop.Repository.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3832),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7853),
                             IsDeleted = false,
                             Name = "Clothing",
                             Path = "clothing"
@@ -144,7 +147,7 @@ namespace Shop.Repository.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3833),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7854),
                             IsDeleted = false,
                             Name = "Home & Kitchen",
                             Path = "home-kitchen"
@@ -152,7 +155,7 @@ namespace Shop.Repository.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3834),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7855),
                             IsDeleted = false,
                             Name = "Toys",
                             Path = "toys"
@@ -174,10 +177,6 @@ namespace Shop.Repository.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -208,57 +207,52 @@ namespace Shop.Repository.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3953),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7976),
                             Description = "Latest smartphone",
-                            Image = "https://cdn.cimri.io/pictures/article/original/48/48330.jpg",
                             IsDeleted = false,
                             Price = 699m,
                             Quantity = 10,
-                            Title = "Iphone 15"
+                            Title = "Smartphone"
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3956),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7979),
                             Description = "High performance laptop",
-                            Image = "https://cdn.vatanbilgisayar.com/Upload/PRODUCT/apple/thumb/114754-1-2_large.jpg",
                             IsDeleted = false,
                             Price = 999m,
                             Quantity = 10,
-                            Title = "Macbook air m1"
+                            Title = "Laptop"
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3957),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7980),
                             Description = "Interesting fiction book",
-                            Image = "https://m.media-amazon.com/images/I/B1SgARaaNFL._AC_UF1000,1000_QL80_.jpg",
                             IsDeleted = false,
                             Price = 19m,
                             Quantity = 10,
-                            Title = "The Host"
+                            Title = "Fiction Book"
                         },
                         new
                         {
                             Id = 4,
                             CategoryId = 2,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3959),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7981),
                             Description = "Informative science book",
-                            Image = "https://m.media-amazon.com/images/I/51E2055ZGUL._AC_UF1000,1000_QL80_.jpg",
                             IsDeleted = false,
                             Price = 29m,
                             Quantity = 10,
-                            Title = "Clean Code"
+                            Title = "Science Book"
                         },
                         new
                         {
                             Id = 5,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3960),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7983),
                             Description = "Comfortable cotton t-shirt",
-                            Image = "https://st-tommy.mncdn.com/mnpadding/1000/1335/FFFFFF/Content/media/ProductImg/original/638225199873500935.webp",
                             IsDeleted = false,
                             Price = 15m,
                             Quantity = 10,
@@ -268,9 +262,8 @@ namespace Shop.Repository.Migrations
                         {
                             Id = 6,
                             CategoryId = 3,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3961),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7984),
                             Description = "Stylish jeans",
-                            Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIGQ4kPv_5xXW1c0A6Kek-gKYgz0v4QLI2LQ&s",
                             IsDeleted = false,
                             Price = 40m,
                             Quantity = 10,
@@ -280,9 +273,8 @@ namespace Shop.Repository.Migrations
                         {
                             Id = 7,
                             CategoryId = 4,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3963),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7985),
                             Description = "Powerful blender",
-                            Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_qRpeFbOBczwAvah7I1P6MTkVzU-voGfz4w&s",
                             IsDeleted = false,
                             Price = 55m,
                             Quantity = 30,
@@ -292,9 +284,8 @@ namespace Shop.Repository.Migrations
                         {
                             Id = 8,
                             CategoryId = 4,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3964),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7986),
                             Description = "Non-stick cookware set",
-                            Image = "https://m.media-amazon.com/images/I/81JUxqQr4bL.jpg",
                             IsDeleted = false,
                             Price = 75m,
                             Quantity = 10,
@@ -304,9 +295,8 @@ namespace Shop.Repository.Migrations
                         {
                             Id = 9,
                             CategoryId = 5,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3966),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7988),
                             Description = "Cool action figure",
-                            Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSviqIY1yGnyOdSv2y6uUSFpag06SPk9KWcKg&s",
                             IsDeleted = false,
                             Price = 25m,
                             Quantity = 10,
@@ -316,9 +306,8 @@ namespace Shop.Repository.Migrations
                         {
                             Id = 10,
                             CategoryId = 5,
-                            CreatedAt = new DateTime(2024, 7, 30, 16, 31, 53, 561, DateTimeKind.Local).AddTicks(3967),
+                            CreatedAt = new DateTime(2024, 7, 28, 13, 12, 9, 34, DateTimeKind.Local).AddTicks(7989),
                             Description = "Fun board game",
-                            Image = "https://www.lego.com/cdn/cs/set/assets/blt3a83606875d8dca3/40719_Box1_v39.png",
                             IsDeleted = false,
                             Price = 30m,
                             Quantity = 20,

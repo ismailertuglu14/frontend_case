@@ -1,6 +1,10 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Web.DTOs;
 using Shop.Web.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace Shop.Web.Controllers
 {
@@ -13,11 +17,14 @@ namespace Shop.Web.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        [Route("{category?}")]
+        public IActionResult Index(string category)
         {
+            ViewBag.Category = category;
             return View();
         }
 
+        
         public IActionResult Privacy()
         {
             return View();

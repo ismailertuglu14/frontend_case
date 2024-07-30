@@ -1,0 +1,187 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<style>
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold; 
+        color: white;
+        text-decoration: none; 
+        transition: color 0.3s ease; 
+    }
+
+    .logo:hover {
+        color: wheat;
+    }
+
+    .content {
+        padding: 2rem;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: white;
+        cursor: pointer;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+        .logo:hover {
+            color: wheat;
+        }
+    .actions {
+        display: flex;
+        width: 15%;
+    }
+    .header {
+        display: flex;
+        justify-content: space-between; /* Elemanları sağa ve sola yaslar */
+        align-items: center; /* Dikey olarak ortalar */
+    }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+
+<header class="bg-dark text-white py-3">
+    <div class="header">
+        <a href="/" class="logo">Full Stack Case</a>
+        <div class="actions">
+            <a id="cart-button" class="text-white">Cart (<span id="cart-count">0</span>)</a>
+            <div class="dropdown">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                    Account
+                </a>
+
+                <ul class="dropdown-menu" id="accountPopup" />
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container mt-4">
+    <div class="row" id="cart-items-list">
+        <h1>Cart Items</h1>
+
+        <!-- Ürün kartları buraya eklenecek -->
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"></script>
+<script>
+
+    $(document).ready(function () {
+        // Token'ı localStorage'dan al
+
+        checkLoginStatus();
+        getCartItems();
+
+        function checkLoginStatus() {
+            var token = localStorage.getItem('accessToken');
+            if (token) {
+                $.ajax({
+                    url: 'https://localhost:7221/api/user',
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    },
+                    success: function (data) {
+                        var accountPopup = $('#accountPopup');
+                        accountPopup.empty();
+                        accountPopup.append('<p> Username: ' + data.data.username + '</p>');
+                        accountPopup.append('<a href="#" id="logoutBtn">Çıkış Yap</a>');
+                        // cart item count
+                        currentCartId = data.data.carts[0].id;
+                        var count = 0;
+                        console.error(data.data);
+                        data.data.carts[0]?.cartItems?.forEach(function (item) {
+                            count += item.quantity;
+                        })
+                        $('#cart-count').text(count);
+                        $('#logoutBtn').on('click', function () {
+                            logout();
+                        });
+                    },
+                    error: function () {
+                        displayLoginOptions();
+                    }
+                });
+            } else {
+                displayLoginOptions();
+            }
+        }
+
+        function getCartItems() {
+            var pathSegments = window.location.pathname.split('/');
+            var cartId = pathSegments[pathSegments.length - 1];
+
+            var token = localStorage.getItem('accessToken');
+            var apiUrl = 'https://localhost:7221/api/Cart/' + cartId;
+            $.ajax({
+                url: apiUrl,
+                method: 'GET',
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+                success: function (data) {
+                    // Listeyi temizle
+                    $('#cart-list').empty();
+                    if (data.data == null) {
+                        var listItem = `
+                                           <div class="col-md-12 mb-4">
+                                                Cart is Not Found!
+                                          </div>
+                                        `;
+                        $('#cart-items-list').append(listItem);
+                    }
+
+                    data.data.cartItems.forEach(function (item) {
+                        var product = item.product;
+                        var listItem = `
+                                        <div class="col-md-12 mb-4" style="border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
+                                            <div class="row">
+                                                <!-- Product Image (Solda) -->
+                                                <div class="col-md-4">
+                                                    <img src="${product.image}" class="img-fluid" style="height: 200px; width: 100%; object-fit: contain;">
+                                                </div>
+                                                <!-- Product Information (Sağda) -->
+                                                <div class="col-md-8">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">${product.title}</h5>
+                                                        <p class="card-text">${product.description}</p>
+                                                        <p class="card-text">Unit Price: $${product.price.toFixed(2)}</p>
+                                                        <p class="card-text">Quantity in Cart: ${item.quantity}</p>
+                                                        <p class="card-text font-weight-bold">Total Price: $${(item.quantity * product.price).toFixed(2)}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`;
+
+                            
+                        $('#cart-items-list').append(listItem);
+                     });
+                    var totalPrice = `
+                                                <div class="container mt-4">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="cart-summary">
+                                                                <h5>Cart Summary</h5>
+                                                                <p id="cartItemCount">Items in Cart: 0</p>
+                                                                <p id="cartTotalAmount">Total Amount: $0.00</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>`;
+                    $('#cart-items-list').append(totalPrice);
+
+
+                },
+                error: function (xhr, status, error) {
+                    console.error('API isteği başarısız oldu: ' + error);
+                }
+            });
+        }
+        // AJAX isteği
+       
+    });
+</script>

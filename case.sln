@@ -13,11 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Entity", "Backend\Shop
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Repository", "Backend\Shop.Repository\Shop.Repository.csproj", "{38AAD969-88DF-4FF2-9FF0-4EBD98B307EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.API", "Backend\Shop.API\Shop.API.csproj", "{D6F11804-3F36-4848-9474-4E3D8D37720F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.API", "Backend\Shop.API\Shop.API.csproj", "{D6F11804-3F36-4848-9474-4E3D8D37720F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Services", "Backend\Shop.Services\Shop.Services.csproj", "{F7BB978C-9FCC-419C-82F5-5D7C15CA4BFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Services", "Backend\Shop.Services\Shop.Services.csproj", "{F7BB978C-9FCC-419C-82F5-5D7C15CA4BFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Core", "Backend\Shop.Core\Shop.Core.csproj", "{22E01D25-FD01-4F48-AB01-B8878D49EBC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Core", "Backend\Shop.Core\Shop.Core.csproj", "{22E01D25-FD01-4F48-AB01-B8878D49EBC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
