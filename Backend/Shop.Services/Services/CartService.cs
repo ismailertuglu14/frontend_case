@@ -82,7 +82,7 @@ namespace Shop.Services.Services
             {
                 Cart cart = await _cartRepository.GetWhereAsync(c => c.User.Id == UserId && !c.IsClosed,
                     ci => ci.Include(c => c.CartItems));
-                CartItem cartItem = cart.CartItems.FirstOrDefault(i => i.ProductId == dto.ProductId);
+                CartItem cartItem = cart.CartItems.FirstOrDefault(i => i.Id == dto.ProductId);
                 if(cartItem != null)
                 {
                     if(cartItem.Quantity - dto.Quantity > 0)

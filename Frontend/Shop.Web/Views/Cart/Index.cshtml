@@ -1,19 +1,18 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 <style>
     .logo {
         font-size: 1.5rem;
-        font-weight: bold; 
+        font-weight: bold;
         color: white;
-        text-decoration: none; 
-        transition: color 0.3s ease; 
+        text-decoration: none;
+        transition: color 0.3s ease;
     }
 
-    .logo:hover {
-        color: wheat;
-    }
+        .logo:hover {
+            color: wheat;
+        }
 
     .content {
         padding: 2rem;
@@ -31,10 +30,12 @@
         .logo:hover {
             color: wheat;
         }
+
     .actions {
         display: flex;
         width: 15%;
     }
+
     .header {
         display: flex;
         justify-content: space-between; /* Elemanları sağa ve sola yaslar */
@@ -61,8 +62,6 @@
 <div class="container mt-4">
     <div class="row" id="cart-items-list">
         <h1>Cart Items</h1>
-
-        <!-- Ürün kartları buraya eklenecek -->
     </div>
 </div>
 
@@ -71,10 +70,9 @@
 <script>
 
     $(document).ready(function () {
-        // Token'ı localStorage'dan al
-
         checkLoginStatus();
         getCartItems();
+        
 
         function checkLoginStatus() {
             var token = localStorage.getItem('accessToken');
@@ -90,7 +88,6 @@
                         accountPopup.empty();
                         accountPopup.append('<p> Username: ' + data.data.username + '</p>');
                         accountPopup.append('<a href="#" id="logoutBtn">Çıkış Yap</a>');
-                        // cart item count
                         currentCartId = data.data.carts[0].id;
                         var count = 0;
                         console.error(data.data);
@@ -124,64 +121,107 @@
                     'Authorization': 'Bearer ' + token
                 },
                 success: function (data) {
-                    // Listeyi temizle
-                    $('#cart-list').empty();
-                    if (data.data == null) {
-                        var listItem = `
-                                           <div class="col-md-12 mb-4">
-                                                Cart is Not Found!
-                                          </div>
-                                        `;
-                        $('#cart-items-list').append(listItem);
-                    }
-
+                // Listeyi temizle
+                $('#cart-list').empty();
+                if (data.data == null) {
+                    var listItem = `
+                        <div class="col-md-12 mb-4">
+                            Cart is Not Found!
+                        </div>
+                    `;
+                    $('#cart-items-list').append(listItem);
+                } else {
                     data.data.cartItems.forEach(function (item) {
                         var product = item.product;
                         var listItem = `
-                                        <div class="col-md-12 mb-4" style="border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
-                                            <div class="row">
-                                                <!-- Product Image (Solda) -->
-                                                <div class="col-md-4">
-                                                    <img src="${product.image}" class="img-fluid" style="height: 200px; width: 100%; object-fit: contain;">
-                                                </div>
-                                                <!-- Product Information (Sağda) -->
-                                                <div class="col-md-8">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">${product.title}</h5>
-                                                        <p class="card-text">${product.description}</p>
-                                                        <p class="card-text">Unit Price: $${product.price.toFixed(2)}</p>
-                                                        <p class="card-text">Quantity in Cart: ${item.quantity}</p>
-                                                        <p class="card-text font-weight-bold">Total Price: $${(item.quantity * product.price).toFixed(2)}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>`;
-
-                            
+                                <div id="product-cart" class="col-md-12 mb-4" style="border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
+                                <div class="row">
+                                    <!-- Product Image (Solda) -->
+                                    <div class="col-md-4">
+                                        <img src="${product.image}" class="img-fluid" style="height: 200px; width: 100%; object-fit: contain;">
+                                    </div>
+                                    <!-- Product Information (Ortada) -->
+                                    <div class="col-md-6">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${product.title}</h5>
+                                            <p class="card-text">${product.description}</p>
+                                            <p class="card-text">Unit Price: $${product.price.toFixed(2)}</p>
+                                            <p class="card-text">Quantity in Cart: <span id="quantity-${item.id}">${item.quantity}</span></p>
+                                            <p class="card-text font-weight-bold">Total Price: $<span id="total-${item.id}">${(item.quantity * product.price).toFixed(2)}</span></p>
+                                        </div>
+                                    </div>
+                                    <!-- Buttons (Sağda) -->
+                                     <div class="col-md-2 d-flex flex-column justify-content-center align-items-end">
+                                        <button class="remove-item btn btn-danger mb-2" data-item-id="${item.id}">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        
                         $('#cart-items-list').append(listItem);
+                    });
+                    $(document).on('click', '.remove-item', function () {
+                            var itemId = $(this).data('item-id');
+                            removeItem(itemId);
                      });
-                    var totalPrice = `
-                                                <div class="container mt-4">
-                                                    <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="cart-summary">
-                                                                <h5>Cart Summary</h5>
-                                                                <p id="cartItemCount">Items in Cart: 0</p>
-                                                                <p id="cartTotalAmount">Total Amount: $0.00</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>`;
-                    $('#cart-items-list').append(totalPrice);
-
-
-                },
-                error: function (xhr, status, error) {
-                    console.error('API isteği başarısız oldu: ' + error);
                 }
-            });
+            },
+            error: function (xhr, status, error) {
+                console.error('API isteği başarısız oldu: ' + error);
+            }
+        });
+
         }
-        // AJAX isteği
-       
     });
+    function removeItem(itemId) {
+        console.log("Remove item: " + itemId);
+        var token = localStorage.getItem('accessToken');
+        $.ajax({
+            url: 'https://localhost:7221/api/Cart/RemoveFromCart',
+            type: 'DELETE',
+            contentType: 'application/json',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            },
+            data: JSON.stringify({
+                productId: itemId,
+                quantity: 1
+            }),
+            success: function (response) {
+                // Başarılı bir yanıt aldığınızda
+                console.log("Item removed successfully");
+
+                // İlgili elementlerin ID'lerini belirleyin
+                var quantityElement = $('#quantity-' + itemId);
+                var totalElement = $('#total-' + itemId);
+
+                var currentQuantity = parseInt(quantityElement.text());
+                var productPrice = parseFloat(totalElement.text()) / currentQuantity;
+
+                var newQuantity = currentQuantity - 1;
+                quantityElement.text(newQuantity);
+
+                var newTotalPrice = (newQuantity * productPrice).toFixed(2);
+                totalElement.text(newTotalPrice);
+
+                if (newQuantity <= 0) {
+                    quantityElement.closest('.card').remove();
+                }
+
+                // Cart
+                var cartCountElement = $('#cart-count');
+                var currentCartCount = parseInt(cartCountElement.text());
+                cartCountElement.text(currentCartCount - 1);
+
+
+                if (newQuantity <= 0) {
+                    quantityElement.closest('#product-cart').remove();
+                }
+
+            },
+            error: function (xhr, status, error) {
+                console.error("Error removing item: ", error);
+            }
+        });
+    }
 </script>

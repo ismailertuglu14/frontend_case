@@ -1,0 +1,62 @@
+﻿<!-- Views/Signup/Index.cshtml -->
+@{
+    ViewBag.Title = "Sign Up";
+}
+
+<h2>Sign Up</h2>
+
+<form id="signupForm">
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#signupForm').submit(function (event) {
+            event.preventDefault(); // Formun sayfayı yenilemesini engelle
+
+            var formData = {
+                Username: $('#username').val(),
+                Password: $('#password').val(),
+                Fullname: $('#fullname').val(),
+                Email: $('#email').val()
+            };
+
+            $.ajax({
+                url: 'https://localhost:7221/api/User/signup',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(formData),
+                success: function (response) {
+                    alert("Successfully registered!")
+                    if (response && response.data && response.data.accessToken) {
+                        localStorage.setItem('accessToken', response.data.accessToken);
+                    }
+
+                    window.location.href = '/';
+                },
+                error: function (xhr, status, error) {
+                    var errorResponse = xhr.responseJSON;
+                    var errorMessage = errorResponse && errorResponse.message ? errorResponse.message : 'Signup failed. Please try again.';
+                    alert(errorMessage);
+                }
+            });
+        });
+    });
+</script>

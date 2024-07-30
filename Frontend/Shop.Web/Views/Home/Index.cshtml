@@ -69,10 +69,7 @@
 </head>
 <body>
     
-    <div aria-live="polite" aria-atomic="true" style="position: relative; z-index: 1000;">
-        <div id="toast-container" style="position: absolute; top: 0; right: 0; margin: 10px;">
-        </div>
-    </div>
+
 
     <header class="bg-dark text-white py-3">
         <div class="header">
@@ -239,7 +236,6 @@
                 });
             }
 
-            // This method fetchs user informations by access token
             function checkLoginStatus() {
                 var token = localStorage.getItem('accessToken');
                 if (token) {
@@ -280,7 +276,7 @@
                 accountPopup.empty();
                 accountPopup.append('<a href="#" id="loginBtn">Signin</a>');
                 accountPopup.append('<br/>');
-                accountPopup.append('<a href="/register">Signup</a>');
+                accountPopup.append('<a href="/auth/signup">Signup</a>');
                 $('#loginBtn').on('click', function () {
                     login();
                 });
@@ -326,7 +322,6 @@
                     success: function (response) {
                         var cartCount = parseInt($('#cart-count').text()) || 0;
                         $('#cart-count').text(cartCount + 1);
-                        showToast(productTitle, 'Product added to cart successfully.','success');
                     },
                     error: function (error) {
                         console.error('Error adding product to cart:', error);
@@ -342,26 +337,6 @@
                 }
             });
         });
-
-        function showToast(header, message, type) {
-            var toastHTML = `
-                <div class="toast bg-${type} text-white" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
-                    <div class="toast-header bg-${type} text-white">
-                        ${header}
-                        <button type="button" class="ml-2 mb-1 close text-black" data-dismiss="toast" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="toast-body">
-                        ${message}
-                    </div>
-                </div>
-            `;
-            $('#toast-container').append(toastHTML);
-            $('.toast').toast('show').delay(2000).fadeOut(function () {
-                $(this).remove();
-            });
-        }
 
 
     </script>

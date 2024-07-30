@@ -5,9 +5,9 @@ using Shop.Services.IServices;
 
 namespace Shop.API.Controllers
 {
+    [EnableCors("MyPolicy")]
     [Route("api/[controller]")]
     [ApiController]
-    [EnableCors("MyPolicy")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _service;
