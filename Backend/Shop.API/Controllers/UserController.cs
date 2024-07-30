@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Core.DTOs.User;
@@ -18,6 +19,8 @@ namespace Shop.API.Controllers
             _service = service;
         }
 
+
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> Get()
         {
